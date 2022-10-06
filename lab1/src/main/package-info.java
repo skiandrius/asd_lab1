@@ -10,4 +10,4 @@
  * @author stormy23
  * @version 1.0
  */
-package firstlab;
+package main;

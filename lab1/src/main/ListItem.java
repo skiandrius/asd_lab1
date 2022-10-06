@@ -1,4 +1,4 @@
-package firstlab;
+package main;
 
 public class ListItem<E> {
 	private E item = null;

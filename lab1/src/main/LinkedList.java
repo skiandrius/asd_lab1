@@ -1,4 +1,4 @@
-package firstlab;
+package main;
 
 public class LinkedList<E> {
     private ListItem<E> firstItem;
@@ -20,12 +20,14 @@ public class LinkedList<E> {
     public boolean add(final E e) {
         if (size == 0) {
             firstItem = new ListItem<E>(e);
+            firstItem.setIndex(0);
             lastItem = firstItem;
         } else {
             item = new ListItem<E>(e);
+            item.setIndex(size);
+            lastItem = lastItem.setNext(item);
         }
-
-        lastItem = lastItem.setNext(item);
+        size++;
         return true;
     }
 
