@@ -118,9 +118,10 @@ public class LinkedList<E> {
         for (int i = 0; i < index; i++) {
             item = item.getNext();
         }
+        E val = item.getValue();
         item.setValue(element);
 
-        return item.getValue();
+        return val;
     }
 
     public boolean contains(final Object o) {
@@ -128,7 +129,7 @@ public class LinkedList<E> {
             return false;
         }
         item = firstItem;
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             if (item.getValue().equals(o)) {
                 return true;
             }
@@ -144,7 +145,7 @@ public class LinkedList<E> {
             return -1;
         }
         item = firstItem;
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             if (item.getValue().equals(o)) {
                 return item.getIndex();
             }

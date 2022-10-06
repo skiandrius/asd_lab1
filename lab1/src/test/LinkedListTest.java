@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import main.LinkedList;
@@ -88,4 +87,71 @@ class LinkedListTest {
         assertEquals("333", listString.remove(0));
     }
 
+    @Test
+    void testGet() {
+        IndexOutOfBoundsException exceptionEmpty1 = assertThrows(IndexOutOfBoundsException.class, () -> listString.get(0));
+        IndexOutOfBoundsException exceptionEmpty2 = assertThrows(IndexOutOfBoundsException.class, () -> listString.get(-1));
+        IndexOutOfBoundsException exceptionEmpty3 = assertThrows(IndexOutOfBoundsException.class, () -> listString.get(1));
+        assertEquals("Index is out of range.", exceptionEmpty1.getMessage());
+        assertEquals("Index is out of range.", exceptionEmpty2.getMessage());
+        assertEquals("Index is out of range.", exceptionEmpty3.getMessage());
+        
+        listString.add("000");
+        assertEquals("000", listString.get(0));
+        
+        listString.add("111");
+        assertEquals("111", listString.get(1));
+        assertEquals("000", listString.get(0));
+    }
+    
+    @Test
+    void testSet() {
+        IndexOutOfBoundsException exceptionEmpty1 = assertThrows(IndexOutOfBoundsException.class, () -> listString.set(-1, "000"));
+        assertEquals("Index is out of range.", exceptionEmpty1.getMessage());
+        IndexOutOfBoundsException exceptionEmpty2 = assertThrows(IndexOutOfBoundsException.class, () -> listString.set(1, "000"));
+        assertEquals("Index is out of range.", exceptionEmpty2.getMessage());
+        
+        listString.add("000");
+        assertEquals("000", listString.set(0, "111"));
+        
+        listString.add("222");
+        assertEquals("111", listString.set(0, "333"));
+        
+        assertEquals("222", listString.set(1, "333"));
+    }
+    
+    @Test
+    void testContains() {
+        assertFalse(listString.contains("000"));
+        
+        listString.add("000");
+        assertTrue(listString.contains("000"));
+        assertFalse(listString.contains("222"));
+        
+        listString.add("111");
+        assertTrue(listString.contains("111"));
+        assertTrue(listString.contains("000"));
+        assertFalse(listString.contains("222"));
+    }
+    
+    @Test
+    void testIndexOf() {
+        assertEquals(-1, listString.indexOf("000"));
+        listString.add("000");
+        assertEquals(0, listString.indexOf("000"));
+        listString.add("111");
+        assertEquals(1, listString.indexOf("111"));
+        assertEquals(-1, listString.indexOf("222"));
+    }
+    
+    @Test
+    void clear() {
+        listString.clear();
+        assertEquals(0, listString.size());
+        
+        listString.add("000");
+        assertEquals(1, listString.size());
+        listString.clear();
+        assertEquals(0, listString.size());
+    }
 }
