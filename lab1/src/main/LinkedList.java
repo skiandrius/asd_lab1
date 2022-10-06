@@ -44,16 +44,19 @@ public class LinkedList<E> {
                 if (prev == null) {
                     firstItem = next;
                     item = null;
+                    size--;
                     return true;
                 }
                 if (next == null) {
                     lastItem = prev;
                     prev.setNext(null);
                     item = null;
+                    size--;
                     return true;
                 }
                 prev.setNext(next);
                 item = null;
+                size--;
                 return true;
             }
             prev = item;
@@ -78,6 +81,7 @@ public class LinkedList<E> {
             firstItem = next;
             E val = item.getValue();
             item = null;
+            size--;
             return val;
         }
         if (next == null) {
@@ -85,11 +89,13 @@ public class LinkedList<E> {
             prev.setNext(null);
             E val = item.getValue();
             item = null;
+            size--;
             return val;
         }
         prev.setNext(next);
         E val = item.getValue();
         item = null;
+        size--;
         return val;
     }
 
